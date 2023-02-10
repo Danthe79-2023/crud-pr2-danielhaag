@@ -10,6 +10,8 @@ const button_eliminar = document.querySelector("#delete");
 
 const content_div = document.getElementById("content");
 
+const content_table = document.getElementById("content-table");
+
 const form = document.querySelector('form');
 
 //const content_table = document.getElementById("content-table");
@@ -126,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {//Espera a que cargue nuest
                 "iphone" : iphone_input.value,
                 "email": email_input.value
             }
-            contacts.splice(i, 1, contact);
+            contacts.splice(i, 1, contact);//actualización...
 
             localStorage.setItem('contacts', JSON.stringify(contacts));
 
@@ -153,39 +155,69 @@ document.addEventListener("DOMContentLoaded", () => {//Espera a que cargue nuest
          div_contact.appendChild(button_delete);
 
          content_div.appendChild(div_contact);
+
+          //Tabla contenido
+
+         const row  = document.createElement('tr');
+         row.innerHTML = `
+           
+            <td><input value="${contacts[i].name}" id="name-${i}"/> </td>
+            <td><input value="${contacts[i].lastName}" id="lastName-${i}"/> </td>
+            <td><input value="${contacts[i].iphone}" id="iphone-${i}"/> </td>
+            <td><input value="${contacts[i].email}" id="email-${i}"/> </td>
+         
+            <td>
+                  <button onclick="saveTable(${i})">Guardar</button>
+                  <button onclick="deleteTable()">Eliminar</button>
+            </td>
+
+         `;
+         content_table.appendChild(row);
         }
+        
     }
+
+    
 
     function deleteLocalstorage(i, contacts){
         contacts.splice(i, 1);
 
         localStorage.setItem('contacts', JSON.stringify(contacts) );
 
-        content_div.innerHTML='';
+        document.querySelector("tbody").innerHTML='';
 
          render(contacts)
     }
 
 })
+function saveTable(i){
+    const input_table_name = document.querySelector(`#name-${i}`);
+    const input_table_lastName = document.querySelector(`#lastName-${i}`);
+    const input_table_iphone = document.querySelector(`#iphone-${i}`);
+    const input_table_email = document.querySelector(`#email-${i}`);
 
-         //Tabla contenido
+    const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
 
-        /* const row  = document.createElement('tr');
-         row.innerHTML = `
-           
-            <td><input value="${contacts[i].name}" id="name-${i}"</td>
-            <td><input value="${contacts[i].lastName}" id="lastName-${i}"/td>
-            <td><input value="${contacts[i].iphone}" id="iphone-${i}" </td>
-            <td><input value="${contacts[i].email}" id="email-${i}" </td>
-         
-            <td>
-                  <button>Eliminar</button>
-                  <button>Eliminar</button>
-            </td>
+    contacts.splice(i, 1, {
+        "name": input_table_name.value,
+        "lastName": input_table_lastName.value,
+        "iphone": input_table_iphone.value,
+        "email" : input_table_email.value
+    })
+    localStorage.setItem("contact", JSON.stringify(contacts));
 
-         `;
-         content_table.appendChild(row);
-        }
-    }*/
+    content_div.innerHTML = '';
+
+    document.querySelector("tbody").innerHTML = '';
+
+    render(contacts);
+
+}
+
+function deleteTable(i){
+
+}
+        
+  
     
 
