@@ -94,12 +94,21 @@ document.addEventListener("DOMContentLoaded", () => {//Espera a que cargue nuest
          const text_button_delete = document.createTextNode("Eliminar");
          button_delete.appendChild(text_button_delete);
 
+         const button_update = document.createElement("button");
+         const text_button_update = document.createTextNode("Update");
+         button_update.appendChild(text_button_update);
+
+         button_update.onclick = () => {
+
+         }
+
          button_delete.onclick = () => {
             deleteLocalstorage(i, contacts)
          }
 
-         //Agregar texto y bitones...
+         //Agregar texto y botones...
          div_contact.appendChild(text_name_lastName_iphone_email);
+         div_contact.appendChild(button_update);
          div_contact.appendChild(button_delete);
 
          content_div.appendChild(div_contact);
