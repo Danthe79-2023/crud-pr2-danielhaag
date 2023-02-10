@@ -10,6 +10,8 @@ const button_eliminar = document.querySelector("#delete");
 
 const content_div = document.getElementById("content");
 
+const form = document.querySelector('form');
+
 //const content_table = document.getElementById("content-table");
 
 
@@ -99,6 +101,45 @@ document.addEventListener("DOMContentLoaded", () => {//Espera a que cargue nuest
          button_update.appendChild(text_button_update);
 
          button_update.onclick = () => {
+          //Cargar elementos en el formulario
+          name_input.value = contacts[i].name;
+          lastName_input.value = contacts[i].lastName;
+          iphone_input.value =contacts[i].iphone;
+          email_input.vale = contacts[i].email;
+
+          // Deshabilitar el botón agregar
+
+          add_button.disabled = true;
+          // Agreganos el boton guardar en el formulario
+          const button_save = document.createElement('button');
+          const text_button_save = document.createTextNode("Guardar")
+
+          button_save.appendChild(text_button_save);
+          button_save.id = i;
+
+          button_save.onclick = (e) => {
+            e.preventDefault();
+            //actualizar información
+            const contact = {
+                "name": name_input.value,
+                "lasName": lastName_input.value,
+                "iphone" : iphone_input.value,
+                "email": email_input.value
+            }
+            contacts.splice(i, 1, contact);
+
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+
+            content_div.innerHTML = '';
+
+            render(contacts);
+
+            button_save.hidden= true;
+
+          }
+
+          form.appendChild(button_save);
+
 
          }
 
