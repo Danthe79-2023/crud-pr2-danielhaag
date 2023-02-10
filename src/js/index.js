@@ -161,10 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {//Espera a que cargue nuest
          const row  = document.createElement('tr');
          row.innerHTML = `
            
-            <td><input value="${contacts[i].name}" id="name-${i}"/> </td>
-            <td><input value="${contacts[i].lastName}" id="lastName-${i}"/> </td>
-            <td><input value="${contacts[i].iphone}" id="iphone-${i}"/> </td>
-            <td><input value="${contacts[i].email}" id="email-${i}"/> </td>
+            <td><input value="${contacts[i].name}" id="name-${i}" /> </td>
+            <td><input value="${contacts[i].lastName}" id="lastName-${i}" /> </td>
+            <td><input value="${contacts[i].iphone}" id="iphone-${i}" /> </td>
+            <td><input value="${contacts[i].email}" id="email-${i}" /> </td>
          
             <td>
                   <button onclick="saveTable(${i})">Guardar</button>
