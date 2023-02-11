@@ -204,7 +204,7 @@ function saveTable(i){
         "iphone": input_table_iphone.value,
         "email" : input_table_email.value
     })
-    localStorage.setItem("contact", JSON.stringify(contacts));
+    localStorage.setItem("contacts", JSON.stringify(contacts));
 
     content_div.innerHTML = '';
 
